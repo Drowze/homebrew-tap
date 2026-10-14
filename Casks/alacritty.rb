@@ -30,10 +30,8 @@ cask "alacritty" do
   zsh_completion  "#{appdir}/Alacritty.app/Contents/Resources/completions/_alacritty"
   fish_completion "#{appdir}/Alacritty.app/Contents/Resources/completions/alacritty.fish"
 
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Alacritty.app"],
-                   sudo: false
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Alacritty.app"]
   end
 
   zap trash: [
